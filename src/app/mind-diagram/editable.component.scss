@@ -1,0 +1,73 @@
+@import '../core/style';
+$toolbar-height: 18px;
+$border-color: #c0dfff;
+$toolbar-button-color: #69b3ff;
+.edit-layer {
+  display: none;
+  &.isActive {
+    display: block;
+  }
+  position: absolute;  
+}
+$edit-padding: 3px;
+.edit-container {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  padding: $edit-padding;
+  border: 2px solid $border-color;
+  border-radius: 3px;
+  background: white;
+  
+}
+.toolbar {
+  display: flex;
+  margin: -3px -3px 3px;
+  .separator {
+    width: 1px;
+    height: 100%;
+    color: white;
+    flex-grow: 0;
+  }
+  span {
+    &.highlighted {
+      background: lightgray;
+    }      
+    background-color: $toolbar-button-color;
+    color: $color-bright;
+    line-height: $toolbar-height;
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+.edit.highlighted {
+  color: $color-bright;
+  background: $node-highlight-color;
+}
+div[contenteditable] {
+  max-width: 15em;
+  min-width: 5em;
+  width: fit-content;
+  white-space: pre-wrap;
+  outline: none;
+}
+:host {
+  display:none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  z-index: 22;
+  &.active {
+    display: block;
+  }
+}
+.modal-dialog.context {
+  margin: 0;
+}
+
+.add-link {
+  background: grey;
+}

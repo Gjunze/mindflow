@@ -1,0 +1,7 @@
+<button mat-raised-button color='primary' [matMenuTriggerFor]='menu'>版本管理</button>
+<mat-menu #menu='matMenu'>
+    <button mat-menu-item (click)='create()'>创建版本</button>
+    <button mat-menu-item>返回工作区</button>
+    <mat-divider ></mat-divider>
+    <button mat-menu-item *ngFor='let tag of tags'>{{tag.name}}</button>
+</mat-menu>

@@ -1,0 +1,30 @@
+
+$color-navy-blue:#34495e;
+$color-violet:#9b59b6;
+$color-blue:#3498db;
+$color-green:#62cb31;
+$color-yellow:#ffb606;
+$color-orange:#e67e22;
+$color-red:#e74c3c;
+$color-red-deep:#c0392b;
+
+// Additional colors
+$color-text: #6a6c6f;
+$color-bright: #f7f9fa;
+$color-background: #f1f3f6;
+$color-background-boxed: lighten($color-background, 3%);
+$border-color: #e4e5e7;
+
+// node definitions
+$node-highlight-color: #00A9CB;
+$button-color: #00A9CB;
+@mixin default-button {
+  &.btn-default2 {
+    border-color: $button-color;
+    color: $button-color;
+    &:hover {
+      background-color: $button-color;
+      //color: white;
+    }
+  }
+}

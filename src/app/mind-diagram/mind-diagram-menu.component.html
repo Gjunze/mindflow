@@ -1,0 +1,14 @@
+<li>
+    <a  (click)="events.emit({name:'undo'})"> 撤销上一步  </a>
+</li>
+<li>
+    <a  (click)="events.emit({name:'download:outline'})"> 生成提纲</a>
+</li>
+
+<li>
+    <a  (click)="events.emit({name:'download:image'})"> 下载脑图 </a>
+</li>
+
+<li>
+    <a (click)="events.emit({name:'share'})" placement="bottom">分享 </a>
+</li>

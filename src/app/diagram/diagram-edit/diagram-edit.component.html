@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <form [formGroup]='form' #editForm='ngForm' (ngSubmit)="confirm()">      
+    <mat-form-field *ngFor='let field of data.fields'>
+        <input matInput *ngIf="field.controlType==='text' || !field.controlType" [formGroup]='form' [formControlName]='field.key' placeholder="{{field.placeholder}}" >
+        <textarea matInput *ngIf="field.controlType==='area'" [formGroup]='form' [formControlName]='field.key' placeholder="{{field.placeholder}}" matTextareaAutosize matAutosizeMinRows="1"
+        matAutosizeMaxRows="5"></textarea>
+</mat-form-field>
+    <button type="submit" style="display:none">hidden submit</button>    
+   </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">取消</button>
+    <button mat-button (click)="editForm.onSubmit(editForm)">确认</button>
+</div>

@@ -1,0 +1,11 @@
+<mat-toolbar color='primary'>
+    <mat-icon  [routerLink]="['/docs']" [queryParams]="backParams" class='back' matTooltip="返回文档列表" [matTooltipPosition]="'right'">home</mat-icon>
+	<span class='title'> {{doc && doc.title}}</span>
+	<button mat-icon-button (click)='editTitle()'> <mat-icon>edit</mat-icon> </button>
+  <span class='spacer' #menu></span>
+  
+</mat-toolbar>
+<div class='content'>
+  <div #diagram></div>
+  <div #panel></div>
+</div>

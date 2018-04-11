@@ -1,0 +1,18 @@
+<div>
+  <div class='children'>
+    <ng-template #recursiveList let-list>
+      <div *ngFor="let item of list"  class='node'>
+        <div class='name'>
+          <i class='fa collapse-sign' (click)='toggleCollapse(item)' [class.fa-minus]='item.foldable' [class.fa-plus]='item.expandable'></i>
+          <i class='fa' [class.fa-circle]='!item.expandable' [class.fa-square]='item.expandable'></i>
+          <div class='content'>{{item.name}} </div>
+        </div>
+        
+        <div *ngIf="item.children && item.children.length > 0" class='children' [@children]='childrenState(item)'>
+          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
+        </div>
+      </div>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: children }"></ng-container>
+  </div>
+</div>

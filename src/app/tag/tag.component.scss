@@ -1,0 +1,21 @@
+.dropdown-menu {
+  > li > a {
+    display: inline-block;
+
+  }
+  > i.fa {
+    margin-right: 3px;
+  }
+  > li {
+    display: flex;
+    > a {
+      flex-grow: 1;
+    }
+    > span {
+      flex-grow: 0;
+      width: 3em;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}

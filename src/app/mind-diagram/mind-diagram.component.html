@@ -1,0 +1,61 @@
+<div class='diagram-wrapper' 
+  #wrapper 
+  [class.fullscreen]='fullscreen' 
+  [@fsAnimate]='fullscreen'
+  (@fsAnimate.done)='centerTree($event)'
+  > 
+  <div class="tool-container tool-right toolbar-success animate-standard" #toolbar [ngClass]='toolbarClass' 
+      (mouseenter)='toolbarMouseEnter($event)' (mousemove)='onToolbarMouse($event)' (mouseleave)='toolbarMouseLeave($event)'
+      [@tbAnimate]='tbState'
+      >
+    <div class="tool-items">
+      <a class="tool-item" (click)='onAdd($event)'>
+        <i class="pe-7s-plus"></i>
+      </a>
+      <a class="tool-item" (click)='onCollapse($event)'>
+        <i class="pe-7s-albums"></i>
+      </a>
+      <a class="tool-item" (click)='onDelete($event)'>
+        <i class="pe-7s-trash"></i>
+      </a>
+    </div>
+    <div class="arrow"></div>
+  </div>  
+  
+  <div class="hpanel horange help-note"  [@helpAnimate]='helpState'>
+    <div class="panel-heading">
+      <div class='title'> 提示</div>
+      <a class="closebox" (click)='helpState = false'><i class="fa fa-times"></i></a>
+    </div>
+    <div class="panel-body">
+      <ol>
+        <li>滚动鼠标滚轮，可放大缩小脑图</li>
+        <li>Tab: 生成子分支</li>
+        <li>Enter: 生成同级分枝</li>
+        <li>Del: 删除本分支及所有子分支</li>
+        <li>Esc: 退出全屏</li>
+      </ol>      
+    </div>
+</div>
+
+
+</div>
+<button (click)="toggleFullscreen()"  type="button" class="btn btn-default zoom" [class.fullscreen]='fullscreen'> 
+  <i class="fa" 
+     [class.fa-expand]="!fullscreen"
+     [class.fa-compress]="fullscreen"
+     ></i>
+</button>
+<tags></tags>  
+
+<ul #menu class='dropdown-menu' [ngStyle]="dropdownStyle">
+  <li> <a data-action="remove">删除</a></li>
+  <li> <a data-action="collapse">折叠</a></li>
+</ul>
+<editable class='text-background'>
+<!-- <textarea #editText class='edit-text' [ngStyle]='editTextStyle' [(ngModel)]='inputText'  (click)='editClick($event)' 
+  (keydown.control.enter)='textAreaNewline($event)' 
+  (keydown.enter)='textAreaSubmit($event)'> </textarea> -->
+
+</editable>
+

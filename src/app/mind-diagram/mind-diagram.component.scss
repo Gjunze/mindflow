@@ -1,0 +1,265 @@
+@import '../core/style';
+$root-text-font-size: 20px;
+$text-font-size: 13px;
+
+.diagram-wrapper {
+    position:relative;
+    width:100%;
+    height:700px;
+    overflow: hidden;
+    background: white;
+    &.fullscreen {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      z-index: 20;
+    }
+}
+
+tags {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 12;   
+}
+
+.help-note {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  z-index: 12;
+  width: 150px;
+  ol {
+    padding-left: 12px;
+  }
+  font-size: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);  
+  background: white;
+}
+.hpanel {
+  display: flex;
+  flex-direction: column;
+}
+.panel-heading {
+  display: flex;
+  .title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .closebox {
+    color: $color-text;
+    flex-grow: 0;
+  }
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.panel-body {
+  padding: 0 10px;
+}
+.add-button {
+  background-image: url('/assets/imgs/addbutton.svg');
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 10px);
+  display: none;
+  &.right {
+    left: 90%;
+  }
+  &.left {
+    right: 90%;
+  }
+  &.show {
+    display: block;
+  }
+}
+.edit-text {
+  width: 15em;
+  height:15em;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+.btn.zoom {
+  position: absolute;
+  top:20px;
+  right:20px;
+  z-index: 12;
+  &.fullscreen {
+    position: fixed;
+    z-index: 22;
+  }
+}
+
+.tool-container {
+  position: absolute;
+  white-space: normal;
+  background-color: #5e696d;
+  background-size: 100% 100%;
+  border-radius: 6px;
+  z-index: 30;
+  transition-property: left, top;
+  transition-duration: 300ms;
+  opacity: 0;
+  display: none;
+  &.show {
+    opacity: 1;
+    display: block;
+  }
+  .tool-items {
+    display: flex;
+    flex-direction: column;
+    .tool-item {
+      display: block;   
+      text-align: center;
+      padding: 5px;
+    }
+    .tool-item > i{
+      font-size: 14px;
+      color: white;
+    }
+  }
+  .arrow {
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-width: 7px;
+    border-style: solid;    
+  }
+  &.tool-right .arrow {
+    border-color: transparent #5e696d transparent transparent;
+    top: 50%;
+    left: -14px;
+    margin-top: -7px;
+  }
+  &.tool-top .arrow {
+    border-color: #5e696d transparent transparent;
+    left: 50%;
+    bottom: -14px;
+    margin-left: -7px;      
+  }
+  &.tool-top .tool-item {
+    float: left;
+    border-right: 0;
+    border-left: 0;    
+  }
+  &.tool-top {
+    border-bottom: 0px solid #beb8b8;
+  }
+  &.toolbar-success  {
+    background-color: $color-orange;
+    &.tool-right .arrow {
+      border-color: transparent $color-orange transparent transparent;    
+    }
+    &.tool-top .arrow {
+      border-color: $color-orange transparent transparent;      
+    }
+  }
+}
+$line-stroke-color:#838383;
+$line-stroke-width:1;
+$root-link-color:#00a9cb;
+
+::ng-deep #mind-tree {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .node rect {
+    stroke:none;
+    fill: white;
+  }
+
+  .link {
+    fill: none;
+    // stroke: #ccc;
+    stroke: $line-stroke-color;
+    stroke-width: $line-stroke-width;
+  }
+  .root-link {
+    stroke: $root-link-color;
+  }
+  .underline {
+    fill: none;
+    stroke: $line-stroke-color;
+    stroke-width:  $line-stroke-width;
+  }
+  .text-layer .text {
+    font-size: $text-font-size;
+    max-width: 15em;
+    min-width: 5em;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    cursor: pointer;
+    white-space: pre-wrap;
+    &:focus {
+    }
+    &.collapsed {
+      background: grey;
+      color: white;
+    }
+    &.drop-target {
+      background: $node-highlight-color;
+    }
+    &.dragging {
+      z-index:10;
+    }
+    display: flex;
+    flex-direction: row-reverse;
+    .inner {
+      flex-grow: 1;
+      height: fit-content;
+    }
+    .href {
+      flex-grow: 0;
+      display: none;
+    }
+    &.has-link {
+      .href {
+        display: block;
+        cursor: pointer;
+      }
+    }
+    &.highlighted {
+      background: $node-highlight-color;
+      color: $color-bright;
+    }
+  }
+  .text-layer {
+    /* opacity: 0; */
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+  .fullscreen {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background: white;
+    top: 0;
+    left: 0;
+    border: none;
+  }
+  svg {
+    position: absolute;
+    overflow: visible;
+    border: none;
+    left: 0;
+    top: 0;
+  }
+  .root-text.text {
+    font-size: $root-text-font-size;
+    position: absolute;
+    max-width: 10em;
+    min-width: 5em;
+    background: white;
+    cursor: pointer;
+    text-align: center;
+  }
+}

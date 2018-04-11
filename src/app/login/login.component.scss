@@ -1,0 +1,36 @@
+@import '../core/style';
+#wx_qr {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  > * {
+    align-self: center;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+  }
+}
+$header-height: 60px;
+$header-background-color: #F1F3F6;
+$brand-font-size: 20px;
+
+header {
+  display: flex;
+  align-items: center;
+  .buttons {
+    flex-grow: 0;
+  }
+  .brand {
+    flex-grow: 1;
+    font-size: $brand-font-size;
+  } 
+}
+header, .footer2 {
+  height: $header-height;
+  background: $header-background-color;
+}
+
+button {
+  @include default-button;  
+}

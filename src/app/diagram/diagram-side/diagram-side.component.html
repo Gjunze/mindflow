@@ -1,0 +1,45 @@
+<mat-toolbar>
+    <span class='list-title'>用例列表</span>
+    <button mat-raised-button (click)='hidePanel()' color='primary'>隐藏 </button>
+</mat-toolbar>
+<div class='content'>
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="path">
+      <mat-header-cell *matHeaderCellDef> 路径 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+        <span>{{element[0]}} </span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="step">
+      <mat-header-cell *matHeaderCellDef> 步骤 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element[1]}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="pre">
+      <mat-header-cell *matHeaderCellDef> 前置状态 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[2]}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> 动作 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[3]}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="post">
+        <mat-header-cell *matHeaderCellDef> 期待结果 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element[4]}} </mat-cell>
+      </ng-container>
+      
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+

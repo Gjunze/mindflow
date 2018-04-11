@@ -1,0 +1,38 @@
+.list-container {
+  position: relative;
+}
+.children {
+  overflow: hidden;
+  transform-origin: 0 0;  
+  margin-left: 14px;
+}    
+.node .children .node {
+  margin-left: 10px;
+}
+.node .children {
+  border-left: 1px solid lightgrey;  
+}
+.name {
+  display: flex;
+  align-items: center;
+  .collapse-sign {
+    width: 14px;
+    font-size: 10px;
+    opacity: 0;
+  }
+  &:hover {
+    .collapse-sign {
+      opacity: 1;
+    }
+  }
+  i {
+    flex-grow: 0;
+    font-size: 8px;
+  }
+  .content {
+    flex-grow: 1;
+    height: fit-content;
+    width: fit-content;
+    padding: 0 0 0 8px;
+  }
+}

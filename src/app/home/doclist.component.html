@@ -1,0 +1,60 @@
+<mat-toolbar color='primary'>
+	<mat-toolbar-row>
+			<folder-path [curDir]="curDir" [docs]='docs'></folder-path>	
+			<span class='spacer'></span>
+			<button mat-button>上一级</button>
+			<button mat-button [matMenuTriggerFor]='newDocMenu'>新建</button>
+			<button mat-button>退出</button>
+			<button mat-button>吐槽</button>
+	</mat-toolbar-row>
+</mat-toolbar>
+<mat-menu #newDocMenu='matMenu'>
+	<button mat-menu-item (click)='onNewDoc("flow")'>流程图</button>
+	<button mat-menu-item (click)='onNewDoc("mind")'>脑图</button>
+	<button mat-menu-item (click)='onNewFolder()'>目录</button>
+</mat-menu>
+<div class='content'>
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 文件名称 </mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngSwitch]="element.type === 'folder'"> 
+        <span [routerLink]="'/'+element.type+'/'+element.id" *ngSwitchCase="false">{{element.title}} </span>
+        <span [routerLink]="['/docs']" [queryParams]="{curDir:element.id}" *ngSwitchCase="true"> {{element.title}} </span>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 类型 </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.type | docTypeName}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-icon matTooltip="删除" class='action' (click)="onDelDoc(element.id, element.title)">delete_forever</mat-icon>
+            <mat-icon matTooltip="移动" class='action' (click)="onMoveDoc(element.id)">filter_none</mat-icon>
+        </mat-cell>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="createdAt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 创建时间 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.createdAt | date}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="updatedAt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 最后修改 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.updatedAt |date }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<ng-template #popQrcode> <img src="http://mf-02.oss-cn-shanghai.aliyuncs.com/WechatIMG40.jpeg" width='100px'  height='100px'> </ng-template>

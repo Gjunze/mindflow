@@ -1,0 +1,1 @@
+<a [routerLink]="['/docs']" > <mat-icon>home</mat-icon></a> <a *ngFor="let p of paths" [routerLink]="['/docs']" [queryParams]="getParams(p.id)"> <span> {{p.name}} > </span>  </a> 

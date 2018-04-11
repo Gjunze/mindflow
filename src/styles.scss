@@ -1,0 +1,132 @@
+
+
+@import "../node_modules/ng2-toastr/ng2-toastr.css";
+
+#busybox {
+}
+
+#busybox div {
+        position: fixed;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 8px solid white;
+        border-left-color: transparent;
+        border-right-color: transparent;
+
+        animation: busybox_kf 1s linear 0s infinite normal none running;
+}
+
+@keyframes busybox_kf {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes busybox_kf {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+}
+
+
+.busybox-bg {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(30, 30, 30, 0.5);
+}
+#busybox.show {
+    display: block;
+}
+
+
+@import '~angular-tree-component/dist/angular-tree-component.css';
+@import "~@angular/material/theming";
+@include mat-core();
+
+// Define a theme.
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+.diagram-page {
+  .content{ 
+    position: relative;
+    .diagram {
+        min-width: 768px;
+        min-height: 768px;
+        flex: 1 1 auto;
+        margin-right: 10px;
+    }
+    .right-panel {
+        display: none;
+        z-index: 10;
+        background: white;
+        
+    }
+    .right-panel.show {
+        @include mat-elevation(2);
+        display: block;
+        min-width: 256px;
+        max-width: 512px;    
+        min-height: 768px;
+        position: absolute;
+        right: 0px;
+    }
+  }
+}
+
+.diagram-page, .doclist-page {
+    .mat-toolbar {
+        @include mat-elevation(3);
+    }
+}
+
+@mixin my-color() {
+  $foreground: map-get($theme, foreground);
+  color: mat-color($foreground, secondary-text);
+}
+.doclist-page {
+  .content {
+    @include mat-elevation(3);
+    margin: 20px;
+    .mat-column-type {
+      max-width:80px;
+    }
+    .mat-column-createdAt, .mat-column-updatedAt, .mat-column-action {
+      max-width: 120px;
+    }
+    .mat-cell .mat-icon {
+      color: mat-color(map-get($theme, foreground), secondary-text);
+      padding-right: 10px;
+      &.action {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+$process-state-color: #00A9CB;
+$start-state-color: #77CB00;
+$end-state-color: #DE3A00;
+
+.diagram-page {
+  path.click-path {
+    stroke-width: 20px;
+    opacity: 0;
+  }
+  .node {
+    text {
+      stroke: none;
+      fill: white;      
+      font-family: "Open Sans";
+    }
+  }
+}
